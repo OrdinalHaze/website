@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIL10 Steels & Metals - Premium Home Security Solutions</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Poppins for general text, Orbitron for headings -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Orbitron:wght=400;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Custom styles to integrate with Tailwind and add specific effects */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0a0a0a; /* Dark background */
+            color: #ffffff; /* Default text color */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* Custom font classes */
+        .font-orbitron {
+            font-family: 'Orbitron', monospace;
+        }
+        .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Gradient text for titles */
+        .gradient-text {
+            background: linear-gradient(45deg, #ff4500, #ff8c00, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Navbar specific styles */
+        .navbar-scrolled {
+            background-color: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 69, 0, 0.3);
+            padding-top: 0.75rem; /* py-3 */
+            padding-bottom: 0.75rem; /* py-3 */
+        }
+
+        /* Hero background animation */
+        .hero-bg-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(255, 69, 0, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 140, 0, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                        linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            animation: bgShift 10s ease-in-out infinite alternate;
+            z-index: -2;
+        }
+
+        @keyframes bgShift {
+            0% { transform: scale(1) rotate(0deg); opacity: 0.8; }
+            100% { transform: scale(1.1) rotate(2deg); opacity: 1; }
+        }
+
+        /* Hero grid pattern */
+        .hero-grid-pattern {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,69,0,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            animation: gridMove 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(10px, 10px); }
+        }
+
+        /* CTA Button hover effect */
+        .cta-button {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        .cta-button:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(255,69,0,0.6);
+            border-color: #ffd700;
+        }
+
+        /* Product Card hover effect */
+        .product-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            backdrop-filter: blur(10px);
+        }
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.2), transparent);
+            transition: left 0.8s ease;
+        }
+        .product-card:hover::before {
+            left: 100%;
+        }
+        .product-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: #ff4500;
+            box-shadow: 0 30px 60px rgba(255,69,0,0.4);
+        }
+
+        /* Gallery Item hover effect */
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1.25rem; /* rounded-xl */
+            height: 350px;
+            cursor: pointer;
+            transition: all 0.5s ease;
+        }
+        .gallery-item:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 25px 50px rgba(255,69,0,0.3);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.2);
+        }
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,69,0,0.9), rgba(255,140,0,0.9));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.5s ease;
+            transform: translateY(100%);
+        }
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Contact Visual Pulse */
+        .contact-visual-content {
+            animation: visualPulse 3s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+        .contact-visual-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2), transparent 50%);
+            animation: shimmer 2s ease-in-out infinite;
+        }
+        @keyframes visualPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 50px rgba(255,69,0,0.5); }
+            50% { transform: scale(1.02); box-shadow: 0 0 80px rgba(255,69,0,0.8); }
+        }
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-100%) translateY(-100%); }
+            50% { transform: translateX(100%) translateY(100%); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #ff4500, #ff8c00);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #ff8c00, #ffd700);
+        }
+
+        /* Mobile Menu Specifics */
+        .mobile-menu {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        .mobile-menu.open {
+            transform: translateX(0);
+            display: flex; /* Show when open */
+        }
+        .mobile-menu-toggle {
+            display: none; /* Hidden by default, shown on mobile */
+            z-index: 1001; /* Above navbar content */
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* Hide desktop nav links */
+            }
+            .mobile-menu-toggle {
+                display: block; /* Show hamburger icon */
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-950 text-white">
+
+    <!-- Animated Background -->
+    <div class="hero-bg-animation"></div>
+
+    <!-- Navigation Bar -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-4 px-5 md:px-10 transition-all duration-300 bg-gray-900 bg-opacity-90 backdrop-blur-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="text-3xl md:text-4xl font-extrabold font-orbitron gradient-text drop-shadow-lg">HIL10</a>
+            
+            <!-- Desktop Navigation Links -->
+            <ul class="nav-links hidden md:flex space-x-8">
+                <li><a href="#home" class="text-lg font-medium hover:text-orange-400 transition duration-300 relative group">Home
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-500 transition-all duration-300 group-hover:w-full"></span>
+                </a></li>
+                <li><a href="#about" class="text-lg font-medium hover:text-orange-400 transition duration-300 relative group">About Us
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-500 transition-all duration-300 group-hover:w-full"></span>
+                </a></li>
+                <li><a href="#products" class="text-lg font-medium hover:text-orange-400 transition duration-300 relative group">Products
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-500 transition-all duration-300 group-hover:w-full"></span>
+                </a></li>
+                <!-- Removed Gallery Link -->
+                <li><a href="#contact" class="text-lg font-medium hover:text-orange-400 transition duration-300 relative group">Contact
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-500 transition-all duration-300 group-hover:w-full"></span>
+                </a></li>
+            </ul>
+
+            <!-- Mobile Menu Toggle (Hamburger Icon) -->
+            <button id="mobile-menu-toggle" class="mobile-menu-toggle text-3xl text-orange-500 focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="mobile-menu">
+        <button id="close-mobile-menu" class="absolute top-6 right-6 text-4xl text-orange-500 focus:outline-none">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul class="flex flex-col space-y-8 text-center">
+            <li><a href="#home" class="text-3xl font-bold text-white hover:text-orange-400 transition duration-300" onclick="document.getElementById('mobile-menu').classList.remove('open')">Home</a></li>
+            <li><a href="#about" class="text-3xl font-bold text-white hover:text-orange-400 transition duration-300" onclick="document.getElementById('mobile-menu').classList.remove('open')">About Us</a></li>
+            <li><a href="#products" class="text-3xl font-bold text-white hover:text-orange-400 transition duration-300" onclick="document.getElementById('mobile-menu').classList.remove('open')">Products</a></li>
+            <!-- Removed Gallery Link from Mobile Menu -->
+            <li><a href="#contact" class="text-3xl font-bold text-white hover:text-orange-400 transition duration-300" onclick="document.getElementById('mobile-menu').classList.remove('open')">Contact</a></li>
+        </ul>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="relative h-screen flex items-center justify-center bg-gradient-to-br from-orange-900/5 to-yellow-900/5 overflow-hidden">
+            <div class="hero-grid-pattern"></div>
+            <div class="relative z-10 text-center max-w-4xl px-4">
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold font-orbitron uppercase tracking-wide leading-tight mb-4 gradient-text animate-pulse">
+                    HIL10 Steels & Metals
+                </h1>
+                <p class="text-xl md:text-3xl font-orbitron font-bold text-orange-400 mb-6 animate-fade-in-up">
+                    Your Foundation for Uncompromising Security
+                </p>
+                <p class="text-lg md:text-xl text-gray-300 mb-10 animate-fade-in-up delay-200">
+                    Crafting premium steel and metal solutions for homes and businesses, ensuring durability, aesthetics, and peace of mind.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-6 animate-fade-in-up delay-400">
+                    <a href="#products" class="cta-button px-8 py-4 bg-gradient-to-r from-orange-600 to-yellow-600 text-white font-bold text-lg rounded-full shadow-xl hover:shadow-2xl transition-all duration-300">
+                        Explore Products
+                    </a>
+                    <a href="#contact" class="cta-button px-8 py-4 border-2 border-orange-500 text-orange-400 font-bold text-lg rounded-full hover:bg-orange-500 hover:text-white transition-all duration-300">
+                        Get a Quote
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="py-20 md:py-32 bg-gray-900 relative">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl md:text-5xl font-extrabold font-orbitron text-center mb-16 gradient-text relative pb-4">
+                    About HIL10 Steels & Metals
+                    <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-full"></span>
+                </h2>
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-1/2 text-lg text-gray-300 leading-relaxed space-y-6">
+                        <p>
+                            At <strong class="text-orange-400">HIL10 Steels & Metals</strong>, we are dedicated to providing superior quality steel and metal products that redefine home security and architectural aesthetics. With years of expertise in the industry, we pride ourselves on our commitment to innovation, craftsmanship, and customer satisfaction.
+                        </p>
+                        <p>
+                            Our journey began with a vision to offer robust and stylish solutions that blend seamlessly with modern living spaces. From state-of-the-art steel doors to durable roofing tiles, every product is meticulously designed and manufactured to meet the highest standards of strength, longevity, and visual appeal.
+                        </p>
+                        <p>
+                            We believe in building lasting relationships with our clients by delivering not just products, but complete peace of mind. Choose HIL10 for unparalleled quality and a secure future.
+                        </p>
+                    </div>
+                    <div class="md:w-1/2 flex justify-center">
+                        <!-- Placeholder for an image or a visual representation of the company -->
+                        <img src="https://placehold.co/600x400/1a1a1a/ff8c00?text=HIL10+Vision" alt="HIL10 Vision" class="rounded-xl shadow-2xl border-2 border-orange-500 transform hover:scale-105 transition-transform duration-500">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products" class="py-20 md:py-32 bg-gray-950 relative">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl md:text-5xl font-extrabold font-orbitron text-center mb-4 gradient-text relative pb-4">
+                    Our Premium Products
+                    <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-full"></span>
+                </h2>
+                <p class="text-center text-xl text-gray-300 mb-16">
+                    Discover our extensive range of high-quality steel and metal solutions.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <!-- Product Card 1: Roofing Tiles -->
+                    <div class="product-card bg-gradient-to-br from-orange-900/10 to-yellow-900/10 p-8 rounded-xl shadow-lg border border-orange-800">
+                        <div class="text-5xl text-orange-400 mb-6">
+                            <i class="fas fa-house-chimney"></i> <!-- Icon for roofing -->
+                        </div>
+                        <h3 class="text-2xl font-bold font-orbitron text-orange-300 mb-4 uppercase">Roofing Tiles</h3>
+                        <p class="text-gray-300 text-lg">
+                            Durable and aesthetically pleasing roofing tiles designed to withstand extreme weather conditions while enhancing your home's curb appeal.
+                        </p>
+                    </div>
+
+                    <!-- Product Card 2: Steel Door -->
+                    <div class="product-card bg-gradient-to-br from-orange-900/10 to-yellow-900/10 p-8 rounded-xl shadow-lg border border-orange-800">
+                        <div class="text-5xl text-orange-400 mb-6">
+                            <i class="fas fa-door-closed"></i> <!-- Icon for door -->
+                        </div>
+                        <h3 class="text-2xl font-bold font-orbitron text-orange-300 mb-4 uppercase">Steel Doors</h3>
+                        <p class="text-gray-300 text-lg">
+                            High-security steel doors offering robust protection without compromising on modern design and elegant finishes.
+                        </p>
+                    </div>
+
+                    <!-- Product Card 3: Steel Windows -->
+                    <div class="product-card bg-gradient-to-br from-orange-900/10 to-yellow-900/10 p-8 rounded-xl shadow-lg border border-orange-800">
+                        <div class="text-5xl text-orange-400 mb-6">
+                            <i class="fas fa-window-frame"></i> <!-- Icon for window -->
+                        </div>
+                        <h3 class="text-2xl font-bold font-orbitron text-orange-300 mb-4 uppercase">Steel Windows</h3>
+                        <p class="text-gray-300 text-lg">
+                            Secure and stylish steel windows providing excellent ventilation, natural light, and enhanced security for your property.
+                        </p>
+                    </div>
+
+                    <!-- Product Card 4: Clay Tile -->
+                    <div class="product-card bg-gradient-to-br from-orange-900/10 to-yellow-900/10 p-8 rounded-xl shadow-lg border border-orange-800">
+                        <div class="text-5xl text-orange-400 mb-6">
+                            <i class="fas fa-house-crack"></i> <!-- Icon for clay tile, maybe a roof element -->
+                        </div>
+                        <h3 class="text-2xl font-bold font-orbitron text-orange-300 mb-4 uppercase">Clay Tiles</h3>
+                        <p class="text-gray-300 text-lg">
+                            Traditional yet resilient clay tiles, perfect for classic architectural styles, offering natural insulation and timeless beauty.
+                        </p>
+                    </div>
+
+                    <!-- Product Card 5: Jali -->
+                    <div class="product-card bg-gradient-to-br from-orange-900/10 to-yellow-900/10 p-8 rounded-xl shadow-lg border border-orange-800">
+                        <div class="text-5xl text-orange-400 mb-6">
+                            <i class="fas fa-grip-lines"></i> <!-- Icon for Jali/lattice -->
+                        </div>
+                        <h3 class="text-2xl font-bold font-orbitron text-orange-300 mb-4 uppercase">Decorative Jali</h3>
+                        <p class="text-gray-300 text-lg">
+                            Intricately designed Jali patterns crafted from high-grade metals, adding elegance and privacy to your interiors and exteriors.
+                        </p>
+                    </div>
+
+                    <!-- Product Card 6: Teak Wood Door -->
+                    <div class="product-card bg-gradient-to-br from-orange-900/10 to-yellow-900/10 p-8 rounded-xl shadow-lg border border-orange-800">
+                        <div class="text-5xl text-orange-400 mb-6">
+                            <i class="fas fa-door-open"></i> <!-- Icon for wood door -->
+                        </div>
+                        <h3 class="text-2xl font-bold font-orbitron text-orange-300 mb-4 uppercase">Teak Wood Doors</h3>
+                        <p class="text-gray-300 text-lg">
+                            Exquisite teak wood doors known for their natural beauty, strength, and resistance to decay, perfect for a luxurious touch.
+                        </p>
+                    </div>
+
+                    <!-- Product Card 7: Laminated Door -->
+                    <div class="product-card bg-gradient-to-br from-orange-900/10 to-yellow-900/10 p-8 rounded-xl shadow-lg border border-orange-800">
+                        <div class="text-5xl text-orange-400 mb-6">
+                            <i class="fas fa-layer-group"></i> <!-- Icon for laminated layers -->
+                        </div>
+                        <h3 class="text-2xl font-bold font-orbitron text-orange-300 mb-4 uppercase">Laminated Doors</h3>
+                        <p class="text-gray-300 text-lg">
+                            Versatile and durable laminated doors offering a wide range of designs and finishes, easy to maintain and long-lasting.
+                        </p>
+                    </div>
+
+                    <!-- Product Card 8: Skin Door -->
+                    <div class="product-card bg-gradient-to-br from-orange-900/10 to-yellow-900/10 p-8 rounded-xl shadow-lg border border-orange-800">
+                        <div class="text-5xl text-orange-400 mb-6">
+                            <i class="fas fa-door-closed"></i> <!-- Icon for door -->
+                        </div>
+                        <h3 class="text-2xl font-bold font-orbitron text-orange-300 mb-4 uppercase">Skin Doors</h3>
+                        <p class="text-gray-300 text-lg">
+                            Cost-effective and stylish skin doors, providing a smooth finish and a variety of textures and patterns for modern interiors.
+                        </p>
+                    </div>
+
+                    <!-- Product Card 9: FRP Door -->
+                    <div class="product-card bg-gradient-to-br from-orange-900/10 to-yellow-900/10 p-8 rounded-xl shadow-lg border border-orange-800">
+                        <div class="text-5xl text-orange-400 mb-6">
+                            <i class="fas fa-fire-extinguisher"></i> <!-- Icon for FRP (fire resistance, durability) -->
+                        </div>
+                        <h3 class="text-2xl font-bold font-orbitron text-orange-300 mb-4 uppercase">FRP Doors</h3>
+                        <p class="text-gray-300 text-lg">
+                            Fiber Reinforced Polymer (FRP) doors, ideal for high-moisture areas, offering excellent water resistance and durability.
+                        </p>
+                    </div>
+
+                    <!-- Product Card 10: Building Materials -->
+                    <div class="product-card bg-gradient-to-br from-orange-900/10 to-yellow-900/10 p-8 rounded-xl shadow-lg border border-orange-800">
+                        <div class="text-5xl text-orange-400 mb-6">
+                            <i class="fas fa-hard-hat"></i> <!-- Icon for building materials -->
+                        </div>
+                        <h3 class="text-2xl font-bold font-orbitron text-orange-300 mb-4 uppercase">Building Materials</h3>
+                        <p class="text-gray-300 text-lg">
+                            Comprehensive range of essential building materials including cement, metal components, and other construction essentials.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 md:py-32 bg-gray-950 relative">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl md:text-5xl font-extrabold font-orbitron text-center mb-4 gradient-text relative pb-4">
+                    Get in Touch
+                    <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-full"></span>
+                </h2>
+                <p class="text-center text-xl text-gray-300 mb-16">
+                    We're here to help you with your steel and metal needs.
+                </p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <!-- Contact Information -->
+                    <div class="space-y-8">
+                        <div class="flex items-start bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-xl p-6 shadow-lg border-l-4 border-orange-500 transition duration-300 hover:scale-[1.02]">
+                            <i class="fas fa-map-marker-alt text-3xl text-orange-400 mr-6 mt-1"></i>
+                            <div>
+                                <h3 class="text-2xl font-bold text-orange-300 mb-2 font-orbitron">Our Location</h3>
+                                <p class="text-gray-300 text-lg">
+                                    HIL10 Steels & Metals,<br>
+                                    Thodupuzha - Pala Road, Pizhaku,<br>
+                                    Kochi, Kerala, India - 686657
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-xl p-6 shadow-lg border-l-4 border-orange-500 transition duration-300 hover:scale-[1.02]">
+                            <i class="fas fa-phone-alt text-3xl text-orange-400 mr-6 mt-1"></i>
+                            <div>
+                                <h3 class="text-2xl font-bold text-orange-300 mb-2 font-orbitron">Call Us</h3>
+                                <p class="text-gray-300 text-lg">
+                                    +91 8075572931<br>
+                                    +91 8590045445<br>
+                                    +91 9526647738
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-xl p-6 shadow-lg border-l-4 border-orange-500 transition duration-300 hover:scale-[1.02]">
+                            <i class="fas fa-envelope text-3xl text-orange-400 mr-6 mt-1"></i>
+                            <div>
+                                <h3 class="text-2xl font-bold text-orange-300 mb-2 font-orbitron">Email Us</h3>
+                                <p class="text-gray-300 text-lg">
+                                    info@hil10steels.com<br>
+                                    sales@hil10steels.com
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-xl p-8 shadow-2xl border border-orange-700">
+                        <h3 class="text-3xl font-bold text-orange-300 mb-8 text-center font-orbitron">Send Us a Message</h3>
+                        <form class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-gray-300 text-lg font-medium mb-2">Your Name</label>
+                                <input type="text" id="name" name="name" placeholder="John Doe" class="w-full px-5 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 text-white text-lg">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-300 text-lg font-medium mb-2">Your Email</label>
+                                <input type="email" id="email" name="email" placeholder="john.doe@example.com" class="w-full px-5 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 text-white text-lg">
+                            </div>
+                            <div>
+                                <label for="subject" class="block text-gray-300 text-lg font-medium mb-2">Subject</label>
+                                <input type="text" id="subject" name="subject" placeholder="Inquiry about Steel Doors" class="w-full px-5 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 text-white text-lg">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-gray-300 text-lg font-medium mb-2">Your Message</label>
+                                <textarea id="message" name="message" rows="5" placeholder="I am interested in..." class="w-full px-5 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 text-white text-lg"></textarea>
+                            </div>
+                            <button type="submit" class="cta-button w-full px-8 py-4 bg-gradient-to-r from-orange-600 to-yellow-600 text-white font-bold text-lg rounded-full shadow-xl hover:shadow-2xl transition-all duration-300">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black py-10 text-center border-t border-orange-900">
+        <div class="container mx-auto px-4">
+            <p class="text-gray-400 text-lg">
+                &copy; <span id="current-year"></span> <span class="text-orange-400 font-bold">HIL10 Steels & Metals</span>. All rights reserved.
+            </p>
+            <p class="text-gray-500 text-sm mt-2">
+                Crafting quality and security for your dream home.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled', 'shadow-lg');
+            } else {
+                navbar.classList.remove('navbar-scrolled', 'shadow-lg');
+            }
+        });
+
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenu.classList.add('open');
+        });
+
+        closeMobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+        });
+
+        // Close mobile menu when a link is clicked
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+            });
+        });
+    </script>
+</body>
+</html>
